@@ -114,9 +114,9 @@ export default function ChatList({
                     alt={`${otherParticipant.firstName} ${otherParticipant.lastName}`}
                     className="w-12 h-12 rounded-full object-cover"
                   />
-                  {isOnline && (
-                    <div className="absolute bottom-0 right-0 w-3 h-3 bg-[#10B981] rounded-full border-2 border-white" />
-                  )}
+                  <div className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white ${
+                    isOnline ? 'bg-green-500' : 'bg-gray-400'
+                  }`} />
                 </div>
                 <div className="flex-1 min-w-0 text-left">
                   <div className="flex items-center justify-between mb-1">
