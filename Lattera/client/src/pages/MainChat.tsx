@@ -199,8 +199,35 @@ export default function MainChat({ onNavigate }: { onNavigate: NavigateFn }) {
     if (!selectedChatId) return;
 
     const unsubscribe = socketService.onNewMessage((message) => {
-      if (message.chatId === selectedChatId) {
-        setMessages((prev) => [...prev, message]);
+      if (message.chatId !== selectedChatId) return;
+
+      setMessages((prev) => {
+        const exists = prev.some((m) => m.id === message.id);
+        if (exists) return prev;
+
+        const messageWithSender: MessageWithSenderResponse = {
+          ...message,
+          sender: message.sender || {
+            id: message.senderId,
+            firstName: '',
+            lastName: '',
+          },
+        };
+
+        return [...prev, messageWithSender];
+      });
+    });
+
+    return () => unsubscribe();
+  }, [selectedChatId]);
+
+  // Subscribe to deleted messages
+  useEffect(() => {
+    if (!selectedChatId) return;
+
+    const unsubscribe = socketService.onMessageDeleted((data) => {
+      if (data.chatId === selectedChatId) {
+        setMessages((prev) => prev.filter((m) => m.id !== data.messageId));
       }
     });
 
@@ -215,22 +242,6 @@ export default function MainChat({ onNavigate }: { onNavigate: NavigateFn }) {
 
       const unsubscribeNewMessage = socketService.onNewMessage(
         (message: MessageResponse) => {
-          setMessages((prev) => {
-            const exists = prev.some((m) => m.id === message.id);
-            if (exists) return prev;
-
-            const messageWithSender: MessageWithSenderResponse = {
-              ...message,
-              sender: message.sender || {
-                id: message.senderId,
-                firstName: '',
-                lastName: '',
-              },
-            };
-
-            return [...prev, messageWithSender];
-          });
-
           setChats((prev) =>
             prev.map((chat) =>
               chat.id === message.chatId
@@ -313,16 +324,11 @@ export default function MainChat({ onNavigate }: { onNavigate: NavigateFn }) {
         );
       });
 
-      const unsubscribeMessageDeleted = socketService.onMessageDeleted((data) => {
-        setMessages((prev) => prev.filter((m) => m.id !== data.messageId));
-      });
-
       return () => {
         unsubscribeNewMessage();
         unsubscribeUserStatus();
         unsubscribeTyping();
         unsubscribeMessageEdited();
-        unsubscribeMessageDeleted();
         socketService.disconnect();
 
         const timeouts = typingTimeoutRef.current;
