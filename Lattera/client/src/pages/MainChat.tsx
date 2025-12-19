@@ -263,6 +263,15 @@ export default function MainChat({ onNavigate }: { onNavigate: NavigateFn }) {
                 : chat
             )
           );
+
+          // Move chat with new message to the beginning
+          setChats((prev) => {
+            const chatIndex = prev.findIndex((c) => c.id === message.chatId);
+            if (chatIndex <= 0) return prev;
+            
+            const [chat] = prev.splice(chatIndex, 1);
+            return [chat, ...prev];
+          });
         }
       );
 
