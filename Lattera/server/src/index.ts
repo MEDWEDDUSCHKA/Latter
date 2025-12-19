@@ -9,6 +9,7 @@ import authRouter from './routes/auth';
 import usersRouter from './routes/users';
 import chatsRouter from './routes/chats';
 import messagesRouter from './routes/messages';
+import feedbackRouter from './routes/feedback';
 import {
   connectDB,
   createIndexes,
@@ -47,6 +48,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/chats', chatsRouter);
 app.use('/api/messages', messagesRouter);
+app.use('/api/feedback-requests', feedbackRouter);
 
 // Root route
 app.get('/', (_req, res) => {
