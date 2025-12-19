@@ -200,48 +200,6 @@ export default function MainChat({ onNavigate }: { onNavigate: NavigateFn }) {
     try {
       socketService.initialize();
 
-      const unsubscribeNewMessage = socketService.onNewMessage(
-        (message: MessageResponse) => {
-          setMessages((prev) => {
-            const exists = prev.some((m) => m.id === message.id);
-            if (exists) return prev;
-
-            const messageWithSender: MessageWithSenderResponse = {
-              ...message,
-              sender: message.sender || {
-                id: message.senderId,
-                firstName: '',
-                lastName: '',
-              },
-            };
-
-            return [...prev, messageWithSender];
-          });
-
-          setChats((prev) =>
-            prev.map((chat) =>
-              chat.id === message.chatId
-                ? {
-                    ...chat,
-                    lastMessage: {
-                      content: message.content,
-                      senderId: message.senderId,
-                      timestamp: message.timestamp,
-                    },
-                    unreadCount:
-                      message.senderId !== user.id
-                        ? {
-                            ...chat.unreadCount,
-                            [user.id]: (chat.unreadCount[user.id] || 0) + 1,
-                          }
-                        : chat.unreadCount,
-                  }
-                : chat
-            )
-          );
-        }
-      );
-
       const unsubscribeUserStatus = socketService.onUserStatus((status) => {
         setOnlineUsers((prev) => {
           const newSet = new Set(prev);
@@ -305,7 +263,6 @@ export default function MainChat({ onNavigate }: { onNavigate: NavigateFn }) {
       });
 
       return () => {
-        unsubscribeNewMessage();
         unsubscribeUserStatus();
         unsubscribeTyping();
         unsubscribeMessageEdited();
@@ -320,6 +277,57 @@ export default function MainChat({ onNavigate }: { onNavigate: NavigateFn }) {
       console.error('Error initializing socket:', error);
     }
   }, [user, selectedChatId]);
+
+  useEffect(() => {
+    if (!selectedChatId) return;
+
+    // Подписаться на новые сообщения
+    const unsubscribe = socketService.onNewMessage((message: MessageResponse) => {
+      // Если сообщение пришло для текущего чата - добавить его в массив
+      if (message.chatId === selectedChatId) {
+        setMessages((prev) => {
+          const exists = prev.some((m) => m.id === message.id);
+          if (exists) return prev;
+
+          const messageWithSender: MessageWithSenderResponse = {
+            ...message,
+            sender: message.sender || {
+              id: message.senderId,
+              firstName: '',
+              lastName: '',
+            },
+          };
+
+          return [...prev, messageWithSender];
+        });
+      }
+
+      // Обновить список чатов для всех новых сообщений
+      setChats((prev) =>
+        prev.map((chat) =>
+          chat.id === message.chatId
+            ? {
+                ...chat,
+                lastMessage: {
+                  content: message.content,
+                  senderId: message.senderId,
+                  timestamp: message.timestamp,
+                },
+                unreadCount:
+                  message.senderId !== user.id
+                    ? {
+                        ...chat.unreadCount,
+                        [user.id]: (chat.unreadCount[user.id] || 0) + 1,
+                      }
+                    : chat.unreadCount,
+              }
+            : chat
+        )
+      );
+    });
+
+    return () => unsubscribe();
+  }, [selectedChatId, user]);
 
   if (!user) {
     return (
