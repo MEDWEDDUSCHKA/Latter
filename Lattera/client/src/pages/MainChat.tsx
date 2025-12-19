@@ -194,6 +194,19 @@ export default function MainChat({ onNavigate }: { onNavigate: NavigateFn }) {
     loadChats();
   }, [loadChats]);
 
+  // Subscribe to new messages
+  useEffect(() => {
+    if (!selectedChatId) return;
+
+    const unsubscribe = socketService.onNewMessage((message) => {
+      if (message.chatId === selectedChatId) {
+        setMessages((prev) => [...prev, message]);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [selectedChatId]);
+
   useEffect(() => {
     if (!user) return;
 
