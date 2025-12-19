@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   createContext,
   useCallback,
@@ -23,6 +24,14 @@ interface AppContextType {
   refreshSession: () => Promise<void>;
   logout: () => Promise<void>;
 
+=======
+import { createContext, useContext, useState, ReactNode } from 'react';
+import { Toast, User } from '../types';
+
+interface AppContextType {
+  currentUser: User | null;
+  setCurrentUser: (user: User | null) => void;
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
   toasts: Toast[];
   addToast: (type: 'success' | 'error', message: string) => void;
   removeToast: (id: string) => void;
@@ -31,6 +40,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: ReactNode }) {
+<<<<<<< HEAD
   const [user, setUser] = useState<UserResponse | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
 
@@ -113,6 +123,28 @@ export function AppProvider({ children }: { children: ReactNode }) {
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+=======
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [toasts, setToasts] = useState<Toast[]>([]);
+
+  const addToast = (type: 'success' | 'error', message: string) => {
+    const id = Math.random().toString(36).substr(2, 9);
+    setToasts((prev) => [...prev, { id, type, message }]);
+    setTimeout(() => removeToast(id), 3000);
+  };
+
+  const removeToast = (id: string) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  };
+
+  return (
+    <AppContext.Provider
+      value={{ currentUser, setCurrentUser, toasts, addToast, removeToast }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 }
 
 export function useApp() {

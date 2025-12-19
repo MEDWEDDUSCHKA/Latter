@@ -104,6 +104,7 @@ const deleteRegistrationData = async (email: string): Promise<boolean> => {
   }
 };
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/auth/register:
@@ -141,6 +142,8 @@ const deleteRegistrationData = async (email: string): Promise<boolean> => {
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 router.post(
   '/register',
   asyncHandler(async (req: Request, res: Response) => {
@@ -181,6 +184,7 @@ router.post(
   })
 );
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/auth/verify-email:
@@ -218,6 +222,8 @@ router.post(
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 router.post(
   '/verify-email',
   asyncHandler(async (req: Request, res: Response) => {
@@ -292,6 +298,7 @@ interface LoginRequestBody {
   password?: string;
 }
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/auth/login:
@@ -351,6 +358,8 @@ interface LoginRequestBody {
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 router.post(
   '/login',
   asyncHandler(async (req: Request, res: Response) => {
@@ -434,6 +443,7 @@ interface RefreshRequestBody {
   refreshToken?: string;
 }
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/auth/refresh:
@@ -471,6 +481,8 @@ interface RefreshRequestBody {
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 router.post(
   '/refresh',
   asyncHandler(async (req: Request, res: Response) => {

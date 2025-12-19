@@ -34,6 +34,7 @@ interface PopulatedSender {
   lastName: string;
 }
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/messages:
@@ -126,6 +127,8 @@ interface PopulatedSender {
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 // POST /api/messages - Create a new message
 router.post(
   '/',
@@ -237,6 +240,7 @@ router.post(
   })
 );
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/messages:
@@ -303,6 +307,8 @@ router.post(
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 // GET /api/messages?chatId=...&limit=50&offset=0 - Get messages
 router.get(
   '/',
@@ -417,6 +423,7 @@ router.get(
   })
 );
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/messages/{messageId}:
@@ -477,6 +484,8 @@ router.get(
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 // PATCH /api/messages/:messageId - Edit a message
 router.patch(
   '/:messageId',
@@ -561,6 +570,7 @@ router.patch(
   })
 );
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/messages/{messageId}:
@@ -616,6 +626,8 @@ router.patch(
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 // DELETE /api/messages/:messageId?forAll=false - Delete a message
 router.delete(
   '/:messageId',

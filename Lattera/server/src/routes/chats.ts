@@ -40,6 +40,7 @@ const getUnreadCount = (
   return (unreadCount as Record<string, number>)[userId] || 0;
 };
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/chats:
@@ -115,6 +116,8 @@ const getUnreadCount = (
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 // POST /api/chats - Create a new chat
 router.post(
   '/',
@@ -278,6 +281,7 @@ router.post(
 );
 
 // GET /api/chats - Get all user's chats
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/chats:
@@ -343,6 +347,8 @@ router.post(
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 router.get(
   '/',
   authMiddleware,
@@ -463,6 +469,7 @@ router.get(
   })
 );
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/chats/{chatId}:
@@ -535,6 +542,8 @@ router.get(
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 // GET /api/chats/:chatId - Get specific chat details
 router.get(
   '/:chatId',

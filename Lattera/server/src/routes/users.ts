@@ -86,6 +86,7 @@ const parseIntParam = (
   return parsed;
 };
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/users/search:
@@ -175,6 +176,8 @@ const parseIntParam = (
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 // GET /api/users/search - Search users
 router.get(
   '/search',
@@ -352,6 +355,7 @@ router.get(
   })
 );
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/users/me/password:
@@ -401,6 +405,8 @@ router.get(
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 // PATCH /api/users/me/password - Change password
 router.patch(
   '/me/password',
@@ -468,6 +474,7 @@ router.patch(
   })
 );
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/users/me:
@@ -504,6 +511,8 @@ router.patch(
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 // GET /api/users/me - Get current user profile
 router.get(
   '/me',
@@ -533,6 +542,7 @@ router.get(
   })
 );
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/users/me:
@@ -627,6 +637,8 @@ router.get(
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 // PATCH /api/users/me - Update user profile
 router.patch(
   '/me',

@@ -8,6 +8,7 @@ import {
 const router = Router();
 
 /**
+<<<<<<< HEAD
  * @swagger
  * /api/health:
  *   get:
@@ -99,6 +100,8 @@ const router = Router();
  *                       example: false
  */
 /**
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
  * @route GET /api/health
  * @desc Health check endpoint
  * @access Public
@@ -131,6 +134,7 @@ router.get('/', async (_req: Request, res: Response) => {
 });
 
 /**
+<<<<<<< HEAD
  * @swagger
  * /api/health/db:
  *   get:
@@ -204,6 +208,8 @@ router.get('/', async (_req: Request, res: Response) => {
  *                       example: "2024-01-15T10:30:00.000Z"
  */
 /**
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
  * @route GET /api/health/db
  * @desc Database health check endpoint
  * @access Public
@@ -234,6 +240,7 @@ router.get('/db', (_req: Request, res: Response) => {
 });
 
 /**
+<<<<<<< HEAD
  * @swagger
  * /api/health/redis:
  *   get:
@@ -301,6 +308,8 @@ router.get('/db', (_req: Request, res: Response) => {
  *                       example: true
  */
 /**
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
  * @route GET /api/health/redis
  * @desc Redis health check endpoint
  * @access Public

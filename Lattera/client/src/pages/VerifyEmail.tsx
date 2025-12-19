@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { Mail } from 'lucide-react';
 
@@ -22,10 +23,27 @@ export default function VerifyEmail({ email, password, onNavigate }: VerifyEmail
   const [timer, setTimer] = useState(59);
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
+=======
+import { useState, useEffect, useRef } from 'react';
+import { Mail } from 'lucide-react';
+import Button from '../components/ui/Button';
+import Logo from '../components/Logo';
+
+interface VerifyEmailProps {
+  email: string;
+  onNavigate: (path: string) => void;
+}
+
+export default function VerifyEmail({ email, onNavigate }: VerifyEmailProps) {
+  const [code, setCode] = useState(['', '', '', '', '', '']);
+  const [timer, setTimer] = useState(59);
+  const [loading, setLoading] = useState(false);
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
   const [error, setError] = useState('');
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
+<<<<<<< HEAD
     if (!email) {
       addToast('error', 'Сначала введите email и пароль');
       onNavigate('/auth/signup');
@@ -86,6 +104,14 @@ export default function VerifyEmail({ email, password, onNavigate }: VerifyEmail
     }
   };
 
+=======
+    const interval = setInterval(() => {
+      setTimer((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
   const handleChange = (index: number, value: string) => {
     if (!/^\d*$/.test(value)) return;
 
@@ -99,16 +125,25 @@ export default function VerifyEmail({ email, password, onNavigate }: VerifyEmail
     }
 
     if (newCode.every((digit) => digit) && newCode.join('').length === 6) {
+<<<<<<< HEAD
       void handleVerify(newCode.join(''));
     }
   };
 
   const handleKeyDown = (index: number, e: KeyboardEvent<HTMLInputElement>) => {
+=======
+      handleVerify(newCode.join(''));
+    }
+  };
+
+  const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
     if (e.key === 'Backspace' && !code[index] && index > 0) {
       inputsRef.current[index - 1]?.focus();
     }
   };
 
+<<<<<<< HEAD
   const handleResend = async () => {
     if (timer > 0 || resendLoading) return;
 
@@ -135,6 +170,36 @@ export default function VerifyEmail({ email, password, onNavigate }: VerifyEmail
     } finally {
       setResendLoading(false);
     }
+=======
+  const handleVerify = async (fullCode: string) => {
+    setLoading(true);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    if (fullCode === '123456') {
+      onNavigate('/onboarding/profile');
+    } else {
+      setError('Неверный код');
+      setCode(['', '', '', '', '', '']);
+      inputsRef.current[0]?.focus();
+
+      const inputs = document.querySelectorAll('.code-input');
+      inputs.forEach((input) => {
+        input.classList.add('animate-shake');
+      });
+      setTimeout(() => {
+        inputs.forEach((input) => {
+          input.classList.remove('animate-shake');
+        });
+      }, 500);
+    }
+    setLoading(false);
+  };
+
+  const handleResend = () => {
+    setTimer(59);
+    setCode(['', '', '', '', '', '']);
+    setError('');
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
   };
 
   return (
@@ -147,10 +212,18 @@ export default function VerifyEmail({ email, password, onNavigate }: VerifyEmail
           <div className="w-16 h-16 bg-gradient-to-br from-[#2290FF] to-[#0066CC] rounded-2xl flex items-center justify-center mx-auto mb-6 animate-in zoom-in duration-700 delay-200">
             <Mail size={32} className="text-white" />
           </div>
+<<<<<<< HEAD
           <h1 className="text-3xl font-bold text-[#1A1A1A] mb-2">Проверьте почту</h1>
           <p className="text-[#6B7280]">
             Мы отправили код на{' '}
             <span className="font-medium text-[#1A1A1A]">{email}</span>
+=======
+          <h1 className="text-3xl font-bold text-[#1A1A1A] mb-2">
+            Проверьте почту
+          </h1>
+          <p className="text-[#6B7280]">
+            Мы отправили код на <span className="font-medium text-[#1A1A1A]">{email}</span>
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
           </p>
         </div>
 
@@ -159,9 +232,13 @@ export default function VerifyEmail({ email, password, onNavigate }: VerifyEmail
             {code.map((digit, index) => (
               <input
                 key={index}
+<<<<<<< HEAD
                 ref={(el) => {
                   inputsRef.current[index] = el;
                 }}
+=======
+                ref={(el) => (inputsRef.current[index] = el)}
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
                 type="text"
                 inputMode="numeric"
                 maxLength={1}
@@ -185,7 +262,11 @@ export default function VerifyEmail({ email, password, onNavigate }: VerifyEmail
           )}
 
           <Button
+<<<<<<< HEAD
             onClick={() => void handleVerify(code.join(''))}
+=======
+            onClick={() => code.every((d) => d) && handleVerify(code.join(''))}
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
             disabled={!code.every((d) => d)}
             loading={loading}
             className="w-full"
@@ -203,11 +284,18 @@ export default function VerifyEmail({ email, password, onNavigate }: VerifyEmail
               </p>
             ) : (
               <button
+<<<<<<< HEAD
                 onClick={() => void handleResend()}
                 disabled={resendLoading}
                 className="text-[#2290FF] hover:underline font-medium disabled:opacity-50"
               >
                 {resendLoading ? 'Отправляем…' : 'Отправить код повторно'}
+=======
+                onClick={handleResend}
+                className="text-[#2290FF] hover:underline font-medium"
+              >
+                Отправить код повторно
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
               </button>
             )}
           </div>

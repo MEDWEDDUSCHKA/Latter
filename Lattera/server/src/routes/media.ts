@@ -28,6 +28,7 @@ const upload = multer({
 });
 
 /**
+<<<<<<< HEAD
  * @swagger
  * /api/media/upload:
  *   post:
@@ -99,6 +100,8 @@ const upload = multer({
  *         $ref: '#/components/responses/InternalServerError'
  */
 /**
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
  * @route POST /api/media/upload
  * @desc Загрузка медиафайла
  * @access Private
@@ -142,6 +145,7 @@ router.post(
 );
 
 /**
+<<<<<<< HEAD
  * @swagger
  * /api/media/{url}:
  *   delete:
@@ -192,6 +196,8 @@ router.post(
  *         $ref: '#/components/responses/InternalServerError'
  */
 /**
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
  * @route DELETE /api/media/:url
  * @desc Удаление медиафайла
  * @access Private
@@ -231,6 +237,7 @@ router.delete(
  * @desc Получение временного URL для скачивания файла
  * @access Private
  */
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/media/presigned/{key}:
@@ -283,6 +290,8 @@ router.delete(
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 router.get(
   '/presigned/:key(*)',
   asyncHandler(async (req: Request, res: Response) => {
@@ -311,6 +320,7 @@ router.get(
  * @desc Получение статистики файлов пользователя
  * @access Private
  */
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/media/user/{userId}/stats:
@@ -368,6 +378,8 @@ router.get(
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 router.get(
   '/user/:userId/stats',
   asyncHandler(async (req: Request, res: Response) => {
@@ -395,6 +407,7 @@ router.get(
  * @desc Получение списка файлов пользователя с пагинацией
  * @access Private
  */
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/media/user/{userId}/files:
@@ -469,6 +482,8 @@ router.get(
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
+=======
+>>>>>>> 96201ff60245a080daa5cad290a96bfc21f231c2
 router.get(
   '/user/:userId/files',
   asyncHandler(async (req: Request, res: Response) => {
